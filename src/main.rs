@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = parse_config(&args);
