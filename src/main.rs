@@ -8,8 +8,15 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
+    run(config);
+
+    
+}
+
+fn run(config: Config) {
     let contents = fs::read_to_string(config.file_path)
         .expect("Should have been able to read the file!");
+    println!("The query is: '{}'",config.query);
     println!("Content in the file: \n{contents}");
 }
 
