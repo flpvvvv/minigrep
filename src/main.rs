@@ -1,7 +1,7 @@
 use std::env;
+use std::error::Error;
 use std::fs;
 use std::process;
-use std::error::Error;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -9,12 +9,15 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
-    run(config);
+    println!("The query is: '{}'", config.query);
+    if let Err(e) = run(config) {
+        println!("Application error: {e}");
+        process::exit(1);
+    }
 }
 
-fn run(config: Config) -> Result<(), Box<dyn Error>>{
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
-    println!("The query is: '{}'", config.query);
     println!("Content in the file: \n{contents}");
     Ok(())
 }
